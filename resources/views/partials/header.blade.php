@@ -1,5 +1,11 @@
 <!-- Header Start --> 
 
+<style>
+	.current-lang {
+		color: #ff0000 !important;
+	}
+</style>
+
 <header class="navigation">
 	<div class="header-top ">
 		<div class="container">
@@ -13,6 +19,10 @@
 				</div>
 				<div class="col-lg-10 col-md-8 text-center text-lg-right text-md-right">
 					<div class="header-top-info">
+						<span class="language-switcher">
+							<a href="{{route('lang', ['lang' => 'en'])}}" class="lang-link ml-0 {{ (app()->getLocale() == 'en') ? 'current-lang' : '' }}">English</a> |
+							<a href="{{route('lang', ['lang' => 'es'])}}" class="lang-link ml-0 {{ (app()->getLocale() == 'es') ? 'current-lang' : '' }}">Español</a>
+						</span>
 						<a href="tel:+23-345-67890">Call Us : <span>+23-345-67890</span></a>
 						<a href="mailto:support@gmail.com" ><i class="fa fa-envelope mr-2"></i><span>support@gmail.com</span></a>
 					</div>
