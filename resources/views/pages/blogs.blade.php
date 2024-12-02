@@ -23,96 +23,18 @@
 	<div class="container">
 		<div class="row">
 
-			<x-blog-post
-				id="1"
-				image="images/blog/1.jpg"
-				category="Technology, Finance"
-				comments-count="5"
-				date="28th January"
-				title="Improve design with typography?"
-				description="Non illo quas blanditiis repellendus laboriosam minima animi. Consectetur accusantium pariatur repudiandae!"
-			/>
+			@foreach ($blogs as $blog)
+				<x-blog-post
+					id="{{$blog->id}}"
+					image="images/blog/1.jpg"
+					category="Technology, Finance"
+					comments-count="5"
+					date="28th January"
+					title="{{$blog->title}}"
+					description="{{$blog->description}}"/>
+			@endforeach
 
-			<x-blog-post
-				id="2"
-				image="images/blog/2.jpg"
-				category="Design"
-				comments-count="10"
-				date="15th February"
-				title="Interactivity design may connect consumer"
-				description="Iste, rerum beatae repellat tenetur incidunt quisquam libero dolores laudantium. Nesciunt quis itaque quidem, voluptatem autem eos animi laborum iusto expedita sapiente."
-			/>
 
-			<x-blog-post
-				id="3"
-				image="images/blog/3.jpg"
-				category="Marketing"
-				comments-count="8"
-				date="20th March"
-				title="Marketing Strategy to bring more affect"
-				description="Quam maiores perspiciatis temporibus odio reiciendis error alias debitis atque consequuntur natus iusto recusandae numquam corrupti facilis blanditiis."
-			/>
-
-			<x-blog-post
-				id="4"
-				image="images/blog/4.jpg"
-				category="Design"
-				comments-count="12"
-				date="12th April"
-				title="How to improve design with ui/ux"
-				description="Consectetur adipisicing elit. Iste, rerum beatae repellat tenetur incidunt quisquam libero dolores laudantium. Nesciunt quis itaque quidem, voluptatem autem eos animi laborum iusto expedita sapiente."
-			/>
-
-			<x-blog-post
-				id="5"
-				image="images/blog/5.jpg"
-				category="Marketing"
-				comments-count="9"
-				date="19th May"
-				title="The best way to marketing in 2020"
-				description="Quam maiores perspiciatis temporibus odio reiciendis error alias debitis atque consequuntur natus iusto recusandae numquam corrupti facilis blanditiis."
-			/>
-
-			<x-blog-post
-				id="6"
-				image="images/blog/6.jpg"
-				category="Design"
-				comments-count="11"
-				date="15th June"
-				title="How to improve design with web development"
-				description="Iste, rerum beatae repellat tenetur incidunt quisquam libero dolores laudantium. Nesciunt quis itaque quidem, voluptatem autem eos animi laborum iusto expedita sapiente."
-			/>
-
-			<x-blog-post
-				id="7"
-				image="images/blog/7.jpg"
-				category="Marketing"
-				comments-count="7"
-				date="10th July"
-				title="The best way to improve design with marketing"
-				description="Non illo quas blanditiis repellendus laboriosam minima animi. Consectetur accusantium pariatur repudiandae!"
-			/>
-
-			<x-blog-post
-				id="8"
-				image="images/blog/8.jpg"
-				category="Design"
-				comments-count="13"
-				date="28th August"
-				title="Improve design with typography?"
-				description="Quam maiores perspiciatis temporibus odio reiciendis error alias debitis atque consequuntur natus iusto recusandae numquam corrupti facilis blanditiis."
-			/>
-
-			<x-blog-post
-				id="9"
-				image="images/blog/8.jpg"
-				category="Design"
-				comments-count="13"
-				date="28th August"
-				title="Improve design with typography?"
-				description="Quam maiores perspiciatis temporibus odio reiciendis error alias debitis atque consequuntur natus iusto recusandae numquam corrupti facilis blanditiis."
-			/>
-		
 		</div>
 
 		<div class="row justify-content-center mt-5">

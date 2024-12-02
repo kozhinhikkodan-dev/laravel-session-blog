@@ -69,7 +69,7 @@
 			</ul>
 
 			<form class="form-lg-inline my-2 my-md-0 ml-lg-4 text-center">
-			  <a href="contact.html" class="btn btn-solid-border btn-round-full">Get a Quote</a>
+			  <a href="{{route('blogs.create')}}" class="btn btn-solid-border btn-round-full">New Blog</a>
 			</form>
 		  </div>
 		</div>
