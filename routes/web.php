@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\App;
 
 Route::get('/',[BlogController::class,'home'])->name('home');
 
+Route::get('/trash',[BlogController::class,'trash'])->name('trash');
+Route::delete('/blogs-force-destroy/{blog}',[BlogController::class,'forceDestroy'])->name('blogs.force.destroy');
+
 Route::resource('/blogs',BlogController::class);
 
 Route::get('switch-lang/{lang}', function ($lang) {

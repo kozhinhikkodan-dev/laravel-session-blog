@@ -33,7 +33,12 @@
             </div>
 
             <div class="col-lg-5 col-sm-12">
-                <div class="contact-content pl-lg-5 mt-5 mt-lg-0">
+            
+            <div class="form-group" style="margin-top: 90px !important;">
+                        <input name="title" type="text" class="form-control" placeholder="Title">
+                    </div>
+
+                <!-- <div class="contact-content pl-lg-5 mt-5 mt-lg-0">
                     <span class="text-muted">We are Professionals</span>
                     <h2 class="mb-5 mt-2">Don’t Hesitate to contact with us for any kind of information</h2>
 
@@ -60,7 +65,7 @@
                             <a href="http://www.themefisher.com"><i class="fab fa-linkedin-in"></i></a>
                         </li>
                     </ul>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

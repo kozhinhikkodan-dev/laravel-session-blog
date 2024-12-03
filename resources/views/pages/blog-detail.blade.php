@@ -230,6 +230,20 @@
 						<a href="#">Social Media</a>
 						<a href="#">Branding</a>
 					</div>
+
+					@if(!$blog->trashed())
+						<form id="" class="00" method="post" action="{{route('blogs.destroy',['blog'=>$blog->id])}}">
+							@csrf
+							@method('DELETE')
+							<button class="btn btn-main" name="submit" type="submit">Delete</button>
+						</form>
+					@endif
+
+					<form id="" class="00" method="post" action="{{route('blogs.force.destroy',['blog'=>$blog->id])}}">
+						@csrf
+						@method('DELETE')
+						<button class="btn btn-primary mt-4" name="submit" type="submit">Permanantly Delete</button>
+					</form>
 				</div>
 			</div>
 		</div>

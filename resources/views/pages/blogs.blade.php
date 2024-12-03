@@ -26,6 +26,7 @@
 			@foreach ($blogs as $blog)
 				<x-blog-post
 					id="{{$blog->id}}"
+					slug="{{$blog->slug}}"
 					image="images/blog/1.jpg"
 					category="Technology, Finance"
 					comments-count="5"

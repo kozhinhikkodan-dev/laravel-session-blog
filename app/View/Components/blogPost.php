@@ -22,6 +22,7 @@ class blogPost extends Component
 	// 			description=""
 
     public $id;
+    public $slug;
     public $image;
     public $category;
     public $commentsCount;
@@ -29,9 +30,10 @@ class blogPost extends Component
     public $title;
     public $description;
 
-    public function __construct($id, $image, $category, $commentsCount, $date, $title, $description)
+    public function __construct($id, $slug,$image, $category, $commentsCount, $date, $title, $description)
     {
         $this->id = $id;
+        $this->slug = $slug;
         $this->image = $image;
         $this->category = $category;
         $this->commentsCount = $commentsCount;
