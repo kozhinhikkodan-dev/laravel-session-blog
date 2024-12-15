@@ -18,7 +18,6 @@ return new class extends Migration
             $table->text('description'); // 
             $table->string('image')->nullable();
             $table->string('category')->nullable();
-            $table->string('tags')->nullable();
             $table->string('author')->nullable();
             $table->string('slug')->nullable();
             $table->timestamps();

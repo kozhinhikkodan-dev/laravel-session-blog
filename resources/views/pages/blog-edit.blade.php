@@ -22,13 +22,34 @@
                     <h3 class="text-md mb-4">New Blog post</h3>
                     <div class="form-group">
                         <input name="title" value="{{$blog->title}}" type="text" class="form-control" placeholder="Title">
+                        @error('title')
+                            <div class="alert alert-danger mt-3">{{ $message }}</div>
+                        @enderror
                     </div>
                     <!-- <div class="form-group">
                         <input name="email" type="email" class="form-control" placeholder="Email Address">
                     </div> -->
                     <div class="form-group-2 mb-4">
                         <textarea name="description" class="form-control" rows="7" placeholder="Description">{{$blog->description}}</textarea>
+                        @error('description')
+                            <div class="alert alert-danger mt-3">{{ $message }}</div>
+                        @enderror
                     </div>
+
+                    <div class="form-group">
+                    <select name="tags[]" class="form-control select2" multiple>
+                    <!-- <option value="0">Invalid</option> -->
+
+                        @foreach ($tags as $tag)
+                            <option value="{{$tag->id}}">{{$tag->name}}</option>
+                        @endforeach
+                    </select>   
+
+                    @error('category_id')
+                            <div class="alert alert-danger mt-3">{{ $message }}</div>
+                        @enderror
+                </div>
+                
                     <button class="btn btn-main" name="submit" type="submit">Update</button>
                 </form>
             </div>

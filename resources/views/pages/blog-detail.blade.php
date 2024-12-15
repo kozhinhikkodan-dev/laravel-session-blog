@@ -35,7 +35,13 @@
 									<span class="text-black text-capitalize mr-3"><i class="ti-time mr-1"></i> 28th January</span>
 								</div>
 
-								<h2 class="mt-3 mb-4"><a href="{{route('blogs.edit',['blog' => $blog->id])}}">{{$blog->title}}</a></h2>
+								
+								<h2 class="mt-3 mb-4"><a href="{{route('blogs.edit',parameters: ['blog' => $blog->id])}}">{{$blog->title}}</a></h2>
+								
+								<p>{{$blog->meta?->meta_title}}</p>
+								<!-- <p>{{ $blog->meta ? $blog->meta->meta_title : 'NO TITLE'}}</p> -->
+
+								
 								<p class="lead mb-4">Non illo quas blanditiis repellendus laboriosam minima animi. Consectetur accusantium pariatur repudiandae!</p>
 
 								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus natus, consectetur? Illum libero vel nihil nisi quae, voluptatem, sapiente necessitatibus distinctio voluptates, iusto qui. Laboriosam autem, nam voluptate in beatae.</p>
@@ -49,9 +55,10 @@
 								<div class="tag-option mt-5 clearfix">
 									<ul class="float-left list-inline">
 										<li>Tags:</li>
-										<li class="list-inline-item"><a href="#" rel="tag">Advancher</a></li>
-										<li class="list-inline-item"><a href="#" rel="tag">Landscape</a></li>
-										<li class="list-inline-item"><a href="#" rel="tag">Travel</a></li>
+										
+										@foreach ($blog?->tags as $tag)
+										<li class="list-inline-item"><a href="{{route('blogs.index').'?tag='.$tag->name }}" rel="tag">{{$tag->name}}</a></li>
+										@endforeach
 									</ul>
 
 									<ul class="float-right list-inline">
@@ -91,8 +98,12 @@
 
 					<div class="col-lg-12 mb-5">
 						<div class="comment-area card border-0 p-5">
-							<h4 class="mb-4">2 Comments</h4>
+							<h4 class="mb-4">{{$blog->comments->count()}} Comments</h4>
 							<ul class="comment-tree list-unstyled">
+
+								@foreach ($blog->comments as $comment)
+								
+
 								<li class="mb-5">
 									<div class="comment-area-box">
 										<img alt="" src="{{asset('images/blog/test1.jpg')}}" class="img-fluid float-left mr-3 mt-2">
@@ -106,34 +117,23 @@
 										</div>
 
 										<div class="comment-content mt-3">
-											<p>Some consultants are employed indirectly by the client via a consultancy staffing company, a company that provides consultants on an agency basis. </p>
+											<p>{{$comment->comment}}</p>
 										</div>
 									</div>
 								</li>
 
-								<li>
-									<div class="comment-area-box">
-										<img alt="" src="{{asset('images/blog/test2.jpg')}}" class="mt-2 img-fluid float-left mr-3">
-
-										<h5 class="mb-1">Philip W</h5>
-										<span>United Kingdom</span>
-
-										<div class="comment-meta mt-4 mt-lg-0 mt-md-0 float-lg-right float-md-right">
-											<a href="#"><i class="icofont-reply mr-2 text-muted"></i>Reply |</a>
-											<span class="date-comm">Posted October 7, 2018</span>
-										</div>
-
-										<div class="comment-content mt-3">
-											<p>Some consultants are employed indirectly by the client via a consultancy staffing company, a company that provides consultants on an agency basis. </p>
-										</div>
-									</div>
-								</li>
+								@endforeach
+								
 							</ul>
 						</div>
 					</div>
 
 					<div class="col-lg-12">
-						<form class="contact-form bg-white rounded p-5" id="comment-form">
+						<form class="contact-form bg-white rounded p-5" id="comment-form" method="post" action="{{route('comments.store')}}">
+							@csrf
+							<!-- @hidden(['blog_id' => $blog->id])
+							  -->
+							<input type="hidden" name="blog_id" value="{{$blog->id}}">
 							<h4 class="mb-4">Write a comment</h4>
 							<div class="row">
 								<div class="col-md-6">
@@ -221,14 +221,18 @@
 					<div class="sidebar-widget bg-white rounded tags p-4 mb-3">
 						<h5 class="mb-4">Tags</h5>
 
-						<a href="#">Web</a>
+						@foreach (App\Models\Tag::all() as $tag)
+							<a href="{{route('blogs.index').'?tag='.$tag->name }}">{{$tag->name}}</a>
+						@endforeach
+
+						<!-- <a href="#">Web</a>
 						<a href="#">agency</a>
 						<a href="#">company</a>
 						<a href="#">creative</a>
 						<a href="#">html</a>
 						<a href="#">Marketing</a>
 						<a href="#">Social Media</a>
-						<a href="#">Branding</a>
+						<a href="#">Branding</a> -->
 					</div>
 
 					@if(!$blog->trashed())

@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Database\Factories\BlogsFactory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Blog extends Model
@@ -23,6 +25,7 @@ class Blog extends Model
     //     'category'
     // ];
     protected $guarded = [];
+    // protected $appends = ['comments'];
 
     
     // protected function slug(): Attribute
@@ -33,16 +36,66 @@ class Blog extends Model
     //     );
     // }
 
-    protected function title(): Attribute
-    {
-        return Attribute::make(
-            // get: fn (string $value) => str_replace('_', '-', $value),
-            set: fn (string $value) => ucfirst($value),
-        );
-    }
+    // protected function title(): Attribute
+    // {
+    //     return Attribute::make(
+    //         // get: fn (string $value) => str_replace('_', '-', $value),
+    //         set: fn (string $value) => ucfirst($value),
+    //     );
+    // }
 
     protected static function newFactory()
     {
         return BlogsFactory::new();
+    }
+
+    public function scopeFindBySlug(Builder $builder,String $slug){
+        return $builder->where('slug',$slug)->firstOrFail();
+
+    }
+
+    public function scopeLastMonthRecords(Builder $builder){
+        // 
+        $startingDate = now()->subMonth()->startOfMonth();
+        $endingDate = now()->subMonth()->endOfMonth();
+        // return $builder->where('created_at','<=',$endingDate)->where('created_at','>=',$startingDate);
+        // return $builder->where(
+        //     [
+        //         ['created_at','<=',$endingDate],
+        //         ['created_at','>=',$startingDate]
+        //     ]
+        // );
+
+        return $builder->whereBetween('created_at',[$startingDate,$endingDate]);
+        
+    }
+
+    public function scopeLastMonthsRecords(Builder $builder,int $noOfMonths){
+        // 
+        $startingDate = now()->subMonths($noOfMonths)->startOfMonth();
+        $endingDate = now()->subMonths($noOfMonths)->endOfMonth();
+        // return $builder->where('created_at','<=',$endingDate)->where('created_at','>=',$startingDate);
+        // return $builder->where(
+        //     [
+        //         ['created_at','<=',$endingDate],
+        //         ['created_at','>=',$startingDate]
+        //     ]
+        // );
+
+        return $builder->whereBetween('created_at',[$startingDate,$endingDate]);
+        
+    }
+
+    public function meta(): HasOne
+    {
+        return $this->hasOne(MetaDetail::class,'blog_id','id');
+    }
+
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
+
+    public function tags(){
+        return $this->belongsToMany(Tag::class);
     }
 }

@@ -23,6 +23,13 @@
 	<div class="container">
 		<div class="row">
 
+		<div class="col-lg-8">
+			Hello
+			{{session('success')}}
+		</div>
+
+
+
 			@foreach ($blogs as $blog)
 				<x-blog-post
 					id="{{$blog->id}}"
