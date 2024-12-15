@@ -54,6 +54,10 @@
 			  </li>
 			   <li class="nav-item"><a class="nav-link" href="service.html">Services</a></li>
 			   <li class="nav-item"><a class="nav-link" href="project.html">Portfolio</a></li>
+			   <li class="nav-item"><a class="nav-link" href="{{route('articles.index')}}">Articles</a></li>
+			   <form class="form-lg-inline my-2 my-md-0 ml-lg-4 text-center">
+				<a href="{{route('articles.create')}}" class="btn btn-solid-border btn-round-full">New Articles</a>
+			   </form>
 			   <li class="nav-item"><a class="nav-link" href="{{route('blogs.index')}}">Blogs</a></li>
 <!-- 
 			   <li class="nav-item dropdown">

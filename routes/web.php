@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
@@ -14,6 +15,10 @@ Route::middleware('web')->group(function (){
     
     Route::resource('/blogs',BlogController::class);
     
+    Route::resource('/articles',ArticleController::class);
+    Route::delete('/articles-force-destroy/{blog}',[ArticleController::class,'forceDestroy'])->name('articles.force.destroy');
+
+
     Route::get('switch-lang/{lang}', function ($lang) {
         Session::put('locale', $lang);
         return redirect()->route('home');
