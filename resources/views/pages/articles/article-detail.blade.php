@@ -128,7 +128,7 @@
 					</div>
 
 					<div class="col-lg-12">
-						<form class="contact-form bg-white rounded p-5" id="comment-form" method="post" action="{{route('comments.store')}}">
+						<form class="contact-form bg-white rounded p-5" id="comment-form" method="post" action="{{route('articles.comments.store')}}">
 							@csrf
 							<!-- @hidden(['blog_id' => $blog->id])
 							  -->

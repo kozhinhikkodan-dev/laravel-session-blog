@@ -42,7 +42,7 @@ class BlogController extends Controller
             $comments = $blog->comments;
         }
 
-        dd($blogs->toArray());
+        // dd($blogs->toArray());
 
         
 
@@ -249,14 +249,11 @@ class BlogController extends Controller
     //    ]);
 
     $blog = Blog::find($request->blog_id);
-    $blog->comments()->createMany([
+    $blog->comments()->create(
         [
-        'comment' => $request->comment
+        'comment' => $request->comment,
         ],
-        [
-        'comment' => $request->comment
-        ]
-    ]);
+    );
 
 
        return redirect()->back()->with('success', 'Comment added successfully');

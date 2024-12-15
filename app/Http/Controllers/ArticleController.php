@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BlogPostRequest;
 use App\Models\Article;
+use App\Models\Blog;
 // use App\Models\Blog;
 // use App\Models\BlogTag;
 use App\Models\Tag;
@@ -32,6 +33,10 @@ class ArticleController extends Controller
     }
     public function index(Request $request)
     {
+
+        // $comments = Comment::where('commentable_id',15)->where('commentable_type',Blog::class)->get();
+
+        // dd($comments->toArray());
 
         $articles = Article::latest()->get();
         // $articles->load('comments');
@@ -132,10 +137,10 @@ class ArticleController extends Controller
         //     'meta_description' => $request->input('meta_description'),
         // ]));
 
-        // $article->meta()->create([
-        //     'meta_title' => $request->input('meta_title'),
-        //     'meta_description' => $request->input('meta_description'),
-        // ]);
+        $article->meta()->create([
+            'meta_title' => $request->input('meta_title'),
+            'meta_description' => $request->input('meta_description'),
+        ]);
 
         // foreach ($request->input( 'tags') as $tagId) {
         //     BlogTag::create([
@@ -241,14 +246,11 @@ class ArticleController extends Controller
     //    ]);
 
     $article = Article::find($request->article_id);
-    $article->comments()->createMany([
+    $article->comments()->create(
         [
         'comment' => $request->comment
         ],
-        [
-        'comment' => $request->comment
-        ]
-    ]);
+    );
 
 
        return redirect()->back()->with('success', 'Comment added successfully');

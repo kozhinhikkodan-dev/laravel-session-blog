@@ -18,6 +18,8 @@ Route::middleware('web')->group(function (){
     Route::resource('/articles',ArticleController::class);
     Route::delete('/articles-force-destroy/{article}',[ArticleController::class,'forceDestroy'])->name('articles.force.destroy');
 
+    Route::post('/article-comments/store',[ArticleController::class,'commentStore'])->name('articles.comments.store');
+
 
     Route::get('switch-lang/{lang}', function ($lang) {
         Session::put('locale', $lang);

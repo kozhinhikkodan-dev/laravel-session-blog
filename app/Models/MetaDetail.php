@@ -12,8 +12,13 @@ class MetaDetail extends Model
     // protected $appends = ['blog'];
 
 
-    public function blog()
+    // public function blog()
+    // {
+    //     return $this->belongsTo(Blog::class);
+    // }
+
+    public function meta()
     {
-        return $this->belongsTo(Blog::class);
+        return $this->morphTo();
     }
 }

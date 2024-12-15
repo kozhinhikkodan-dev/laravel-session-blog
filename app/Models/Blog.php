@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Blog extends Model
@@ -86,14 +87,18 @@ class Blog extends Model
         
     }
 
-    public function meta(): HasOne
+    public function meta(): MorphOne
     {
-        return $this->hasOne(MetaDetail::class,'blog_id','id');
+        return $this->morphOne(MetaDetail::class,'meta');
     }
 
-    public function comments(){
-        return $this->hasMany(Comment::class);
-    }
+    // public function comments(){
+    //     return $this->hasMany(Comment::class);
+    // }
+
+        public function comments(){
+            return $this->morphMany(Comment::class,'commentable');
+        }
 
     public function tags(){
         return $this->belongsToMany(Tag::class);
