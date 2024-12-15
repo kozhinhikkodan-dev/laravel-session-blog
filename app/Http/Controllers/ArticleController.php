@@ -34,19 +34,21 @@ class ArticleController extends Controller
     {
 
         $articles = Article::latest()->get();
-        $articles->load('comments');
+        // $articles->load('comments');
 
-        foreach ($articles as $article) {
-            $comments = $article->comments;
-        }
+        // foreach ($articles as $article) {
+        //     $comments = $article->comments;
+        // }
         if($request->tag){
             // $articles = Tag::where('name',$request->tag)->with('blogs')->get()[0]['blogs'];
         }else{
-            $articles = Article::with('comments')->latest()->get();
+            // $articles = Article::with('comments')->latest()->get();
+            $articles = Article::latest()->get();
+
         }
         
 
-        session('success','all good');
+        // session('success','all good');
         return view('pages.articles.articles', data: compact('articles'));
     }
 

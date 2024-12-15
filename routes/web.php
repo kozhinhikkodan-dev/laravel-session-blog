@@ -16,7 +16,7 @@ Route::middleware('web')->group(function (){
     Route::resource('/blogs',BlogController::class);
     
     Route::resource('/articles',ArticleController::class);
-    Route::delete('/articles-force-destroy/{blog}',[ArticleController::class,'forceDestroy'])->name('articles.force.destroy');
+    Route::delete('/articles-force-destroy/{article}',[ArticleController::class,'forceDestroy'])->name('articles.force.destroy');
 
 
     Route::get('switch-lang/{lang}', function ($lang) {

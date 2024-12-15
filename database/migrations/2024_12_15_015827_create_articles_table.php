@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('author')->nullable();
             $table->string('slug')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

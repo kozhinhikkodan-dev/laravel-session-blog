@@ -39,7 +39,6 @@
 								<h2 class="mt-3 mb-4"><a href="{{route('articles.edit',parameters: ['article' => $article->id])}}">{{$article->title}}</a></h2>
 								
 								<p>{{$article->meta?->meta_title}}</p>
-								<!-- <p>{{ $blog->meta ? $blog->meta->meta_title : 'NO TITLE'}}</p> -->
 
 								
 								<p class="lead mb-4">Non illo quas blanditiis repellendus laboriosam minima animi. Consectetur accusantium pariatur repudiandae!</p>
@@ -56,7 +55,7 @@
 									<ul class="float-left list-inline">
 										<li>Tags:</li>
 										
-										@foreach ($blog?->tags as $tag)
+										@foreach ($article?->tags ?? [] as $tag)
 										<li class="list-inline-item"><a href="{{route('articles.index').'?tag='.$tag->name }}" rel="tag">{{$tag->name}}</a></li>
 										@endforeach
 									</ul>
@@ -98,10 +97,10 @@
 
 					<div class="col-lg-12 mb-5">
 						<div class="comment-area card border-0 p-5">
-							<h4 class="mb-4">{{$article->comments->count()}} Comments</h4>
+							<h4 class="mb-4">{{$article?->comments->count()}} Comments</h4>
 							<ul class="comment-tree list-unstyled">
 
-								@foreach ($article->comments as $comment)
+								@foreach ($article?->comments as $comment)
 								
 
 								<li class="mb-5">
@@ -235,7 +234,7 @@
 						<a href="#">Branding</a> -->
 					</div>
 
-					@if(!$blog->trashed())
+					@if(!$article->trashed())
 						<form id="" class="00" method="post" action="{{route('articles.destroy',['article'=>$article->id])}}">
 							@csrf
 							@method('DELETE')
