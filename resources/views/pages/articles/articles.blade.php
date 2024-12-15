@@ -31,7 +31,7 @@
 
 
 			@foreach ($articles as $article)
-				<x-blog-post
+				<x-article-post
 					id="{{$article->id}}"
 					slug="{{$article->slug}}"
 					image="images/blog/1.jpg"

@@ -42,7 +42,7 @@ class ArticleController extends Controller
         if($request->tag){
             // $articles = Tag::where('name',$request->tag)->with('blogs')->get()[0]['blogs'];
         }else{
-            $articles = Article::with('comments','tags')->latest()->get();
+            $articles = Article::with('comments')->latest()->get();
         }
         
 
@@ -130,10 +130,10 @@ class ArticleController extends Controller
         //     'meta_description' => $request->input('meta_description'),
         // ]));
 
-        $article->meta()->create([
-            'meta_title' => $request->input('meta_title'),
-            'meta_description' => $request->input('meta_description'),
-        ]);
+        // $article->meta()->create([
+        //     'meta_title' => $request->input('meta_title'),
+        //     'meta_description' => $request->input('meta_description'),
+        // ]);
 
         // foreach ($request->input( 'tags') as $tagId) {
         //     BlogTag::create([
@@ -225,7 +225,7 @@ class ArticleController extends Controller
     //Todo : replace String with Blog
     public function show(String $article)
     {
-        $article = Article::with('comments','tags')->withTrashed()->findBySlug($article);
+        $article = Article::with('comments')->withTrashed()->findBySlug($article);
         // dd($blog->toArray());
         return view('pages.articles.article-detail', compact('article'));
     }
