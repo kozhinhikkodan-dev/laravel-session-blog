@@ -87,10 +87,26 @@ class Blog extends Model
         
     }
 
+    // public function meta()
+    // {
+    //     return $this->hasOneThrough(MetaDetail::class, User::class,'id','id','author_id','id');
+    // }
+
     public function meta(): MorphOne
     {
-        return $this->morphOne(MetaDetail::class,'meta');
+        return $this->morphOne(MetaDetail::class, 'meta');
     }
+
+    public function metaAuthor()
+    {
+        return $this->hasOneThrough(User::class, MetaDetail::class, 'meta_id', 'id', 'id', 'author_id');
+    }
+
+    public function tagAuthors()
+    {
+        return $this->hasManyThrough(User::class, BlogTag::class, 'blog_id', 'id', 'id', 'author_id');
+    }
+
 
     // public function comments(){
     //     return $this->hasMany(Comment::class);

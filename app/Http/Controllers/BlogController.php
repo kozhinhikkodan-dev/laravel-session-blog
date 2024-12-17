@@ -121,7 +121,7 @@ class BlogController extends Controller
             'title' => $request->input('title'),
             'description' => $request->input('description'),
             'slug' => Str::slug($request->input('title')),
-            'author' => $request->input(key: 'author'),
+            // 'author' => $request->input(key: 'author'),
             // 'tags' => $request->input(key: 'tags'),
             'image' => $request->input(key: 'image'),
             'category' => $request->input(key: 'category'),
@@ -143,12 +143,14 @@ class BlogController extends Controller
         $blog->meta()->create([
             'meta_title' => $request->input('meta_title'),
             'meta_description' => $request->input('meta_description'),
+            'author_id' => $request->input(key: 'author_id'),
         ]);
 
         foreach ($request->input( 'tags') as $tagId) {
             BlogTag::create([
                 'blog_id' => $blog->id,
-                'tag_id' => $tagId
+                'tag_id' => $tagId,
+                'author_id' => $request->input(key: 'author_id'),
             ]);
         }
 
@@ -235,7 +237,11 @@ class BlogController extends Controller
     //Todo : replace String with Blog
     public function show(String $blog)
     {
-        $blog = Blog::with('comments','tags')->withTrashed()->findBySlug($blog);
+        $blog = Blog::with('comments','tags','tags.author','metaAuthor','tagAuthors')->withTrashed()->findBySlug($blog);
+
+        // $authors = $blog->authors;
+
+
         // dd($blog->toArray());
         return view('pages.blog-detail', compact('blog'));
     }

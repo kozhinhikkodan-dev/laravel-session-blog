@@ -38,8 +38,32 @@
 								
 								<h2 class="mt-3 mb-4"><a href="{{route('blogs.edit',parameters: ['blog' => $blog->id])}}">{{$blog->title}}</a></h2>
 								
-								<p>{{$blog->meta?->meta_title}}</p>
-								<!-- <p>{{ $blog->meta ? $blog->meta->meta_title : 'NO TITLE'}}</p> -->
+								<p>Blog ID : {{$blog->id}}</p>
+
+								<p>Meta Title : {{$blog->meta?->meta_title}}</p>
+								
+								<!-- nested -->
+								<p>Meta Title (direct): {{$blog->meta?->author->name}}</p>
+
+
+								<p>Meta Author (through): {{$blog->metaAuthor->name}}</p>
+
+
+								<p>Tag Author (through): </p>
+
+								@foreach ($blog->tagAuthors as $key => $tagAuthor)
+									<p>Tag Author {{$key+1}} : {{$tagAuthor->name}} </p>
+								@endforeach
+
+
+								<p>Tag Author (direct): </p>
+								@foreach ($blog->tags as $key => $tag)
+									<p>{{$tag->author->name}}</p>
+								@endforeach
+
+
+
+								<!-- <p>{{ $blog->meta  ? $blog->meta->meta_title : 'NO TITLE'}}</p> -->
 
 								
 								<p class="lead mb-4">Non illo quas blanditiis repellendus laboriosam minima animi. Consectetur accusantium pariatur repudiandae!</p>

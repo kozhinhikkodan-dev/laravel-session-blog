@@ -29,7 +29,7 @@ dump(session()->all());
                     <div class="form-group">
                         <input name="title" value="{{ old('title') }}" type="text" class="form-control" placeholder="Title">
                         @error('title')
-                            <div class="alert alert-danger mt-3">{{ $message }}</div>
+                        <div class="alert alert-danger mt-3">{{ $message }}</div>
                         @enderror
                     </div>
                     <!-- <div class="form-group">
@@ -38,44 +38,57 @@ dump(session()->all());
                     <div class="form-group-2">
                         <textarea name="description" class="form-control" rows="7" placeholder="Description">{{ old('description') }}</textarea>
                         @error('description')
-                            <div class="alert alert-danger mt-3">{{ $message }}</div>
+                        <div class="alert alert-danger mt-3">{{ $message }}</div>
                         @enderror
                     </div>
 
                     <div class="form-group">
-                    <select name="category_id" class="form-control">
-                    <!-- <option value="0">Invalid</option> -->
+                        <select name="category_id" class="form-control">
+                            <!-- <option value="0">Invalid</option> -->
 
-                        @foreach ($categories as $category)
+                            @foreach ($categories as $category)
                             <option value="{{$category->id}}">{{$category->name}}</option>
-                        @endforeach
-                    </select>   
+                            @endforeach
+                        </select>
 
-                    @error('category_id')
-                            <div class="alert alert-danger mt-3">{{ $message }}</div>
+                        @error('category_id')
+                        <div class="alert alert-danger mt-3">{{ $message }}</div>
                         @enderror
-                </div>
+                    </div>
 
-                <div class="form-group">
-                    <select name="tags[]" class="form-control select2" multiple>
-                    <!-- <option value="0">Invalid</option> -->
+                    <div class="form-group">
+                        <select name="author_id" class="form-control">
+                        <option value="0" disabled selected>Choose Author</option>
+                            @foreach (App\Models\User::all() as $user)
+                            <option value="{{$user->id}}">{{$user->name}}</option>
+                            @endforeach
+                        </select>
 
-                        @foreach ($tags as $tag)
+                        @error('author_id')
+                        <div class="alert alert-danger mt-3">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <select name="tags[]" class="form-control select2" multiple>
+                            <!-- <option value="0">Invalid</option> -->
+
+                            @foreach ($tags as $tag)
                             <option value="{{$tag->id}}">{{$tag->name}}</option>
-                        @endforeach
-                    </select>   
+                            @endforeach
+                        </select>
 
-                    @error('category_id')
-                            <div class="alert alert-danger mt-3">{{ $message }}</div>
+                        @error('category_id')
+                        <div class="alert alert-danger mt-3">{{ $message }}</div>
                         @enderror
-                </div>
+                    </div>
 
-                
 
-                <div class="form-group">
+
+                    <div class="form-group">
                         <input name="image" type="file" class="form-control" placeholder="Title">
                         @error('image')
-                            <div class="alert alert-danger mt-3">{{ $message }}</div>
+                        <div class="alert alert-danger mt-3">{{ $message }}</div>
                         @enderror
                     </div>
 
@@ -84,14 +97,14 @@ dump(session()->all());
                     <div class="form-group">
                         <input name="meta_title" type="text" class="form-control" placeholder="Meta Title">
                         @error('meta_title')
-                            <div class="alert alert-danger mt-3">{{ $message }}</div>
+                        <div class="alert alert-danger mt-3">{{ $message }}</div>
                         @enderror
                     </div>
 
                     <div class="form-group">
                         <input name="meta_description" type="text" class="form-control" placeholder="Meta Description">
                         @error('meta_description')
-                            <div class="alert alert-danger mt-3">{{ $message }}</div>
+                        <div class="alert alert-danger mt-3">{{ $message }}</div>
                         @enderror
                     </div>
 
@@ -108,7 +121,7 @@ dump(session()->all());
 
             <div class="col-lg-5 col-sm-12">
 
-               
+
 
                 <!-- <div class="contact-content pl-lg-5 mt-5 mt-lg-0">
                     <span class="text-muted">We are Professionals</span>
